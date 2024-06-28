@@ -28,25 +28,27 @@ const SideDrawer = () => {
 
 
     const handlefunction = async () => {
+        if (rollno) {
+            try {
+                const config = {
 
-        try {
-            const config = {
+                    headers: {
+                        'Content-type': "application/json",
 
-                headers: {
-                    'Content-type': "application/json",
+                    },
 
-                },
-
-            };
-            const { data } = await axios.post("/api/studentdata/add", { userId, studentName: name, studentRollno: rollno, studentMarks: { English: englishNo, Maths: mathNo, Science: scienceNo } }, config)
-            console.log(data);
-            setCount(count + 1);
-            defaultState();
+                };
+                const { data } = await axios.post("/api/studentdata/add", { userId, studentName: name, studentRollno: rollno, studentMarks: { English: englishNo, Maths: mathNo, Science: scienceNo } }, config)
+                console.log(data);
+                setCount(count + 1);
+                defaultState();
 
 
-        } catch (error) {
-            console.log("error in saving student")
+            } catch (error) {
+                console.log("error in saving student");
+            }
         }
+
 
     }
 
@@ -69,17 +71,24 @@ const SideDrawer = () => {
             Add Student
         </Button>
         <Drawer
+
             isOpen={isOpen}
             placement='left'
             onClose={onClose}
 
+
         >
             <DrawerOverlay />
-            <DrawerContent>
+            <DrawerContent
+                bg={"#4C3BCF"}
+                color={"white"}
+            >
                 <DrawerCloseButton />
                 <DrawerHeader>Add Student</DrawerHeader>
 
-                <DrawerBody>
+                <DrawerBody
+
+                >
                     <FormControl >
                         <FormLabel>Student Name</FormLabel>
                         <Input type='name'
@@ -130,4 +139,4 @@ const SideDrawer = () => {
     )
 }
 
-export default SideDrawer
+export default SideDrawer;
