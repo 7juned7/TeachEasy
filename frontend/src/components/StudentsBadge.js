@@ -30,15 +30,19 @@ const StudentsBadge = (user) => {
     const { particulardata, setParticulardata } = useContext(StudentDataContext)
 
 
-    const handleClick = () => {
+    const handleClick = (e) => {
+        console.log(e.target.parentElement.childElement);
 
         setParticulardata(user);
         console.log(particulardata);
 
+
     }
     const userId = localStorage.getItem("userId");
     const studentRollno = user.rollno;
+
     const handleDelete = async () => {
+
         try {
             const config = {
 
@@ -66,24 +70,26 @@ const StudentsBadge = (user) => {
     }
 
     const handlefunction = async () => {
+        if (user.rollno) {
+            try {
+                const config = {
 
-        try {
-            const config = {
+                    headers: {
+                        'Content-type': "application/json",
 
-                headers: {
-                    'Content-type': "application/json",
+                    },
 
-                },
-
-            };
-            const { data } = await axios.post("/api/studentdata/update", { userId, studentName: name, studentRollno: user.rollno, studentMarks: { English: englishNo, Maths: mathNo, Science: scienceNo } }, config)
-            console.log(data);
-            setCount(count + 1);
+                };
+                const { data } = await axios.post("/api/studentdata/update", { userId, studentName: name, studentRollno: user.rollno, studentMarks: { English: englishNo, Maths: mathNo, Science: scienceNo } }, config)
+                console.log(data);
+                setCount(count + 1);
 
 
-        } catch (error) {
-            console.log("error in saving student");
+            } catch (error) {
+                console.log("error in saving student");
+            }
         }
+
 
     }
 
@@ -96,18 +102,22 @@ const StudentsBadge = (user) => {
             display={"flex"}
 
             alignItems={"center"}
-            background={"#f1f1f1"}
+
             width={"100%"}
             justifyContent={"space-between"}
-            pl={"1rem"}
-            pt={2}
-            pb={2}
+            p={"1rem"}
+
             borderRadius={"lg"}
             margin={1}
+
+
+
         >
             <Box display={"flex"}
                 justifyContent={"center"}
-                alignItems={"center"} >
+                alignItems={"center"}
+
+            >
 
                 <Avatar
                     mr={2}
@@ -125,13 +135,14 @@ const StudentsBadge = (user) => {
             <Box display={"flex"}
                 justifyContent={"center"}
                 alignContent={"center"}
-                gap={2}>
+                gap={2}
+            >
 
-                <Button colorScheme='teal' onClick={handleDelete}>
+                <Button colorScheme='red' onClick={handleDelete}>
                     Delete
                 </Button>
                 <Box onClick={handleEdit}>
-                    <Button colorScheme='teal' onClick={onOpen}>
+                    <Button colorScheme='blue' onClick={onOpen}>
                         edit
                     </Button>
                     <Drawer
@@ -166,16 +177,19 @@ const StudentsBadge = (user) => {
                                         <Input type='number'
                                             value={englishNo}
                                             onChange={(e) => { setEnglishNo(e.target.value) }}
+                                            required
                                         />
                                         <FormLabel>Math</FormLabel>
                                         <Input type='name'
                                             value={mathNo}
                                             onChange={(e) => { setMathNo(e.target.value) }}
+                                            required
                                         />
                                         <FormLabel>Science</FormLabel>
                                         <Input type='name'
                                             value={scienceNo}
                                             onChange={(e) => { setScienceNo(e.target.value) }}
+                                            required
                                         />
 
                                     </FormControl>
@@ -201,4 +215,4 @@ const StudentsBadge = (user) => {
     )
 }
 
-export default StudentsBadge
+export default StudentsBadge;
