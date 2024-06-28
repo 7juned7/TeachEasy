@@ -15,7 +15,7 @@ import {
 
 const Allstudents = () => {
     const { sort, setSort } = useContext(StudentDataContext);
-    
+
     const { data } = useContext(StudentDataContext);
 
     const sortby = (e) => {
@@ -32,26 +32,37 @@ const Allstudents = () => {
 
     return (
         <div>
-            <Box width={"sm"}
-                height={"lg"}
+            <Box
+                bg={"#402E7A"}
+                p={"1rem"}
+                width={"sm"}
+                height={"md"}
                 border={"solid"}
-                p={2}
+                color={"white"}
                 borderRadius={"lg"}
                 textAlign={"center"}
                 overflowY={"scroll"}
+
             ><Box display={"flex"}
                 justifyContent={"space-between"}
-                alignItems={"center"}>
+                alignItems={"center"}
 
-                    <Text width={"100%"}>All Students</Text>
+                position={"sticky"}
+                top={"0"}
+                zIndex={"999"}
+                p={2}
+
+
+            >
+
+                    <Text>All Students</Text>
                     <Menu>
-                        <MenuButton as={Button}>
+                        <MenuButton as={Button} bg={"white"} color={"#402E7A"}>
                             {!sort ? ("") : (sort)}
                         </MenuButton>
-                        <MenuList>
-                            <MenuItem onClick={sortby} >A-Z</MenuItem>
-                            <MenuItem onClick={sortby}>by rollno</MenuItem>
-
+                        <MenuList bg={"white"} color={"#402E7A"}>
+                            <MenuItem bg={"white"} onClick={sortby} >A-Z</MenuItem>
+                            <MenuItem bg={"white"} onClick={sortby}>by rollno</MenuItem>
                         </MenuList>
                     </Menu>
                 </Box>
@@ -72,7 +83,7 @@ const Allstudents = () => {
                                     </div>
                                 )
                             })
-                        ) : ("ab")
+                        ) : ("")
                     }
 
 
@@ -81,7 +92,7 @@ const Allstudents = () => {
             </Box>
 
 
-        </div>
+        </div >
     )
 }
 
