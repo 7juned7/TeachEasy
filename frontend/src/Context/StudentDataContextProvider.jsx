@@ -9,37 +9,39 @@ const StudentDataContextProvider = ({ children }) => {
     const userId = localStorage.getItem("userId");
     const [sort, setSort] = useState("A-Z");
 
+    console.log(userId)
 
 
     const fetchStudents = async () => {
-
-        try {
-
-
-
-            const config = {
-
-                headers: {
-                    'Content-type': "application/json",
-
-                },
-
-            };
-            const { data } = await axios.post("/api/studentdata/data", { userId, sort }, config)
+        if (userId) {
+            try {
 
 
-            setData(data)
 
-        } catch (error) {
-            console.log("error hai")
+                const config = {
+
+                    headers: {
+                        'Content-type': "application/json",
+
+                    },
+
+                };
+                const { data } = await axios.post("/api/studentdata/data", { userId, sort }, config)
+
+
+                setData(data)
+
+            } catch (error) {
+                console.log("error hai")
+            }
         }
     }
 
     useEffect(() => {
 
-        fetchStudents()
-        
-    }, [count, sort])
+        fetchStudents();
+
+    }, [count, sort, userId])
 
 
     return (
