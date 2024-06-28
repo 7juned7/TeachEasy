@@ -13,16 +13,22 @@ const Navbar = () => {
         <Box
             display={"flex"}
             justifyContent={"space-between"}
+            alignItems={"center"}
+            padding={"1rem 2rem"}
+
+
         >
 
+
             <Box>
-                <Text>TeachEasy</Text>
+                <Text fontSize={"1rem"} fontWeight={"600"} color={"white"}>TeachEasy</Text>
             </Box>
-            <Button onClick={logout}>
+            <Button bg={"red"} color={"white"} onClick={logout}
+                _hover={{ background: "red", opacity: "80%" }}>
                 Logout
             </Button>
         </Box>
     )
 }
 
-export default Navbar
+export default Navbar;
