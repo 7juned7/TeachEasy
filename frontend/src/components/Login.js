@@ -30,7 +30,7 @@ const Login = () => {
             let userId = data._id;
 
             localStorage.setItem("userId", userId)
-
+            
             Navigate("/teacheasy")
 
         } catch (error) {
